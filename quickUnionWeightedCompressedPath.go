@@ -5,7 +5,7 @@ type QuickUnionWeightedCompressedPathUF struct {
 	TreeSize []int
 }
 
-func initQuickWeightedUF(size int) *QuickUnionWeightedCompressedPathUF {
+func initQuickWeightedCompressedPathUF(size int) *QuickUnionWeightedCompressedPathUF {
 	quwCUF := QuickUnionWeightedCompressedPathUF{Elements: make([]int, size),
 		TreeSize: make([]int, size)}
 	for i := range quwCUF.Elements {

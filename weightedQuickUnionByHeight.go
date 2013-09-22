@@ -1,12 +1,12 @@
 package dynCon
 
-type QuickUnionWeightedUF struct {
+type QuickUnionWeightedByHeightUF struct {
 	Elements   []int
 	TreeHeight []int
 }
 
-func initQuickWeightedUF(size int) *QuickUnionWeightedUF {
-	quwUF := QuickUnionWeightedUF{Elements: make([]int, size),
+func initQuickWeightedByHeightUF(size int) *QuickUnionWeightedByHeightUF {
+	quwUF := QuickUnionWeightedByHeightUF{Elements: make([]int, size),
 		TreeHeight: make([]int, size)}
 	for i := range quwUF.Elements {
 		quwUF.Elements[i] = i
@@ -15,18 +15,18 @@ func initQuickWeightedUF(size int) *QuickUnionWeightedUF {
 	return &quwUF
 }
 
-func (quwUF QuickUnionWeightedUF) root(i int) int {
+func (quwUF QuickUnionWeightedByHeightUF) root(i int) int {
 	for i != quwUF.Elements[i] {
 		i = quwUF.Elements[i]
 	}
 	return i
 }
 
-func (quwUF QuickUnionWeightedUF) connected(p, q int) bool {
+func (quwUF QuickUnionWeightedByHeightUF) connected(p, q int) bool {
 	return quwUF.root(p) == quwUF.root(q)
 }
 
-func (quwUF *QuickUnionWeightedUF) union(p, q int) {
+func (quwUF *QuickUnionWeightedByHeightUF) union(p, q int) {
 	i := quwUF.root(p)
 	j := quwUF.root(q)
 	if quwUF.TreeHeight[i] < quwUF.TreeHeight[j] {
