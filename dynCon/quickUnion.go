@@ -1,4 +1,4 @@
-package main
+package quickunion
 
 import "fmt"
 
@@ -26,15 +26,4 @@ func union(id []int, p, q int) {
 	j := root(id, q)
 	id[i] = j
 
-}
-
-func main() {
-	id := quickUnion(10)
-	union(id, 5, 0)
-	union(id, 5, 6)
-	union(id, 1, 2)
-	union(id, 8, 3)
-	union(id, 4, 9)
-	fmt.Printf("connected 1,2 ? = %v \n", connected(id, 1, 2))
-	fmt.Printf("connected 1,7 ? = %v \n", connected(id, 1, 7))
 }

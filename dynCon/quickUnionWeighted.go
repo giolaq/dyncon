@@ -1,4 +1,4 @@
-package main
+package quickunionweighted
 
 import "fmt"
 
@@ -37,13 +37,3 @@ func union(id, sz []int, p, q int) {
 
 }
 
-func main() {
-	id, sz := quickUnionWeighted(10)
-	union(id, sz, 5, 0)
-	union(id, sz, 5, 6)
-	union(id, sz, 1, 2)
-	union(id, sz, 8, 3)
-	union(id, sz, 4, 9)
-	fmt.Printf("connected 1,2 ? = %v \n", connected(id, 1, 2))
-	fmt.Printf("connected 1,7 ? = %v \n", connected(id, 1, 7))
-}
