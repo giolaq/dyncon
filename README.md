@@ -1,4 +1,4 @@
-AlgoGo
+dynCon
 ======
 
-Algorithms and data structures implementations in Go
+Algorithms implementations in Go to solve Dynamic Connectivity problem
