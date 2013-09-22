@@ -1,39 +1,41 @@
-package quickunionweighted
+package dynCon
 
-import "fmt"
-
-func quickUnionWeighted(N int) ([]int, []int) {
-	id := make([]int, N)
-	sz := make([]int, N)
-
-	for i := range id {
-		id[i] = i
-		sz[i] = 1
-	}
-	return id, sz
+type QuickUnionWeightedUF struct {
+	Elements []int
+	TreeSize []int
 }
 
-func root(id []int, i int) int {
-	for i != id[i] {
-		i = id[i]
+func initQuickWeightedUF(size int) *QuickUnionWeightedUF {
+	quwUF := QuickUnionWeightedUF{Elements: make([]int, size),
+		TreeSize: make([]int, size)}
+	for i := range quwUF.Elements {
+		quwUF.Elements[i] = i
+		quwUF.TreeSize[i] = 1
+	}
+	return &quwUF
+}
+
+func (quwUF QuickUnionWeightedUF) root(i int) int {
+	for i != quwUF.Elements[i] {
+		i = quwUF.Elements[i]
 	}
 	return i
 }
 
-func connected(id []int, p, q int) bool {
-	return root(id, p) == root(id, q)
+func (quwUF QuickUnionWeightedUF) connected(p, q int) bool {
+	return quwUF.root(p) == quwUF.root(q)
 }
 
-func union(id, sz []int, p, q int) {
-	i := root(id, p)
-	j := root(id, q)
-	if sz[i] < sz[j] {
-		id[i] = j
-		sz[j] = sz[j] + sz[i]
+func (quwUF *QuickUnionWeightedUF) union(p, q int) {
+	i := quwUF.root(p)
+	j := quwUF.root(q)
+	if quwUF.TreeSize[i] < quwUF.TreeSize[j] {
+		quwUF.Elements[i] = j
+		quwUF.TreeSize[j] = quwUF.TreeSize[j] + quwUF.TreeSize[i]
 	} else {
-		id[j] = i
-		sz[i] = sz[i] + sz[j]
+		quwUF.Elements[j] = i
+		quwUF.TreeSize[i] = quwUF.TreeSize[i] + quwUF.TreeSize[j]
+
 	}
 
 }
-

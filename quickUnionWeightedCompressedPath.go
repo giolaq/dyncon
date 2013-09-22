@@ -1,39 +1,41 @@
-package quickUnionWeightedCompressedPath
+package dynCon
 
-import "fmt"
-
-func quickUnionWeightedCP(N int) ([]int, []int) {
-	id := make([]int, N)
-	sz := make([]int, N)
-
-	for i := range id {
-		id[i] = i
-		sz[i] = 1
-	}
-	return id, sz
+type QuickUnionWeightedCompressedPathUF struct {
+	Elements []int
+	TreeSize []int
 }
 
-func root(id []int, i int) int {
-	for i != id[i] {
-		id[i] = id[id[i]]
-		i = id[i]
+func initQuickWeightedUF(size int) *QuickUnionWeightedCompressedPathUF {
+	quwCUF := QuickUnionWeightedCompressedPathUF{Elements: make([]int, size),
+		TreeSize: make([]int, size)}
+	for i := range quwCUF.Elements {
+		quwCUF.Elements[i] = i
+		quwCUF.TreeSize[i] = 1
+	}
+	return &quwCUF
+}
+
+func (quwCUF QuickUnionWeightedCompressedPathUF) root(i int) int {
+	for i != quwCUF.Elements[i] {
+		i = quwCUF.Elements[i]
 	}
 	return i
 }
 
-func connected(id []int, p, q int) bool {
-	return root(id, p) == root(id, q)
+func (quwCUF QuickUnionWeightedCompressedPathUF) connected(p, q int) bool {
+	return quwCUF.root(p) == quwCUF.root(q)
 }
 
-func union(id, sz []int, p, q int) {
-	i := root(id, p)
-	j := root(id, q)
-	if sz[i] < sz[j] {
-		id[i] = j
-		sz[j] = sz[j] + sz[i]
+func (quwCUF *QuickUnionWeightedCompressedPathUF) union(p, q int) {
+	i := quwCUF.root(p)
+	j := quwCUF.root(q)
+	if quwCUF.TreeSize[i] < quwCUF.TreeSize[j] {
+		quwCUF.Elements[i] = j
+		quwCUF.TreeSize[j] = quwCUF.TreeSize[j] + quwCUF.TreeSize[i]
 	} else {
-		id[j] = i
-		sz[i] = sz[i] + sz[j]
+		quwCUF.Elements[j] = i
+		quwCUF.TreeSize[i] = quwCUF.TreeSize[i] + quwCUF.TreeSize[j]
+
 	}
 
 }

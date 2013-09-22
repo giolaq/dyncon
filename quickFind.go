@@ -1,12 +1,11 @@
-package quickfind
-
+package dynCon
 
 type QuickFindUF struct {
-	Elements []int	
+	Elements []int
 }
 
 func initQuickFindUF(size int) *QuickFindUF {
-	qfUF := QuickFindUF{ Elements: make([]int, size) }
+	qfUF := QuickFindUF{Elements: make([]int, size)}
 	for i := range qfUF.Elements {
 		qfUF.Elements[i] = i
 	}

@@ -1,29 +1,31 @@
-package quickunion
+package dynCon
 
-import "fmt"
-
-func quickUnion(N int) []int {
-	id := make([]int, N)
-	for i := range id {
-		id[i] = i
-	}
-	return id
+type QuickUnionUF struct {
+	Elements []int
 }
 
-func root(id []int, i int) int {
-	for i != id[i] {
-		i = id[i]
+func initQuickUnionUF(size int) *QuickUnionUF {
+	quUF := QuickUnionUF{Elements: make([]int, size)}
+	for i := range quUF.Elements {
+		quUF.Elements[i] = i
+	}
+	return &quUF
+}
+
+func (quUF QuickUnionUF) root(i int) int {
+	for i != quUF.Elements[i] {
+		i = quUF.Elements[i]
 	}
 	return i
 }
 
-func connected(id []int, p, q int) bool {
-	return root(id, p) == root(id, q)
+func (quUF QuickUnionUF) connected(p, q int) bool {
+	return quUF.root(p) == quUF.root(q)
 }
 
-func union(id []int, p, q int) {
-	i := root(id, p)
-	j := root(id, q)
-	id[i] = j
+func (quUF *QuickUnionUF) union(p, q int) {
+	i := quUF.root(p)
+	j := quUF.root(q)
+	quUF.Elements[i] = j
 
 }
