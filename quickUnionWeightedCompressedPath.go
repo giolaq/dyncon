@@ -1,4 +1,4 @@
-package dynCon
+package dyncon
 
 type QuickUnionWeightedCompressedPathUF struct {
 	Elements []int

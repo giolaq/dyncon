@@ -1,4 +1,4 @@
-package dynCon
+package dyncon
 
 type QuickUnionWeightedByHeightUF struct {
 	Elements   []int

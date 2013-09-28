@@ -1,4 +1,4 @@
-package dynCon
+package dyncon
 
 type QuickUnionUF struct {
 	Elements []int

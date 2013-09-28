@@ -1,4 +1,4 @@
-package dynCon
+package dyncon
 
 type QuickFindUF struct {
 	Elements []int
