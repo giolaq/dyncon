@@ -1,23 +1,31 @@
 package dyncon
 
-type QuickFindUF struct {
+type Interface interface {
+	Union(p, q int)
+	Connected(p, q int) bool
+	Find(p int) int
+	
+}
+
+
+type QuickFind struct {
 	Elements []int
 }
 
-func initQuickFindUF(size int) *QuickFindUF {
-	qfUF := QuickFindUF{Elements: make([]int, size)}
+func initQuickFind(size int) *QuickFind {
+	qfUF := QuickFind{Elements: make([]int, size)}
 	for i := range qfUF.Elements {
 		qfUF.Elements[i] = i
 	}
 	return &qfUF
 }
 
-func (qfUF QuickFindUF) connected(p, q int) bool {
+func (qfUF QuickFind) Connected(p, q int) bool {
 	return qfUF.Elements[p] == qfUF.Elements[q]
 
 }
 
-func (qfUF *QuickFindUF) union(p, q int) {
+func (qfUF *QuickFind) Union(p, q int) {
 	pid := qfUF.Elements[p]
 	qid := qfUF.Elements[q]
 	for i := range qfUF.Elements {
@@ -26,4 +34,8 @@ func (qfUF *QuickFindUF) union(p, q int) {
 		}
 	}
 
+}
+
+func (qf *QuickFind) Find(p int) int {
+	return qf.Elements[p]
 }
