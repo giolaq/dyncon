@@ -4,9 +4,7 @@ type Interface interface {
 	Union(p, q int)
 	Connected(p, q int) bool
 	Find(p int) int
-	
 }
-
 
 type QuickFind struct {
 	Elements []int
